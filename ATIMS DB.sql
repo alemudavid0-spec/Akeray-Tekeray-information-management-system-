@@ -16,7 +16,6 @@ CREATE TABLE [User] (
     is_active BIT DEFAULT 1
 );
 
-
 CREATE TABLE IDDocument (
     document_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT NOT NULL FOREIGN KEY REFERENCES [User](user_id),
@@ -32,7 +31,6 @@ CREATE TABLE IDDocument (
     rejection_reason TEXT NULL
 );
 
-
 CREATE TABLE Akeray (
     akeray_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT UNIQUE NOT NULL FOREIGN KEY REFERENCES [User](user_id),
@@ -40,7 +38,6 @@ CREATE TABLE Akeray (
     id_document_id INT NULL FOREIGN KEY REFERENCES IDDocument(document_id),
     registration_date DATETIME DEFAULT GETDATE()
 );
-
 
 CREATE TABLE Tekeray (
     tekeray_id INT PRIMARY KEY IDENTITY(1,1),
@@ -50,7 +47,6 @@ CREATE TABLE Tekeray (
     id_document_id INT NULL FOREIGN KEY REFERENCES IDDocument(document_id),
     emergency_contact VARCHAR(20) NULL
 );
-
 
 CREATE TABLE Property (
     property_id INT PRIMARY KEY IDENTITY(1,1),
@@ -66,7 +62,6 @@ CREATE TABLE Property (
     last_updated DATETIME DEFAULT GETDATE()
 );
 
-
 CREATE TABLE Lease (
     lease_id INT PRIMARY KEY IDENTITY(1,1),
     property_id INT NOT NULL FOREIGN KEY REFERENCES Property(property_id),
@@ -81,7 +76,6 @@ CREATE TABLE Lease (
     submitted_at DATETIME NULL,
     CONSTRAINT CHK_Lease_Dates CHECK (end_date > start_date)
 );
-
 
 CREATE TABLE Payment (
     payment_id INT PRIMARY KEY IDENTITY(1,1),
@@ -100,7 +94,6 @@ CREATE TABLE Payment (
     created_at DATETIME DEFAULT GETDATE(),
     approved_at DATETIME NULL
 );
-
 
 CREATE TABLE MaintenanceRequest (
     request_id INT PRIMARY KEY IDENTITY(1,1),
@@ -123,4 +116,5 @@ CREATE TABLE TownOfficeVerification (
     decision VARCHAR(20) NOT NULL CHECK (decision IN ('approved', 'rejected')),
     comments TEXT NULL,
     date_verified DATETIME DEFAULT GETDATE()
+
 );
